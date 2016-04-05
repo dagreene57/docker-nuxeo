@@ -58,8 +58,8 @@ if [ "$1" = 'nuxeoctl' ]; then
       echo "nuxeo.redis.port=${NUXEO_REDIS_PORT:=6379}" >> $NUXEO_CONF
     fi
     
-    mkdir -p ${NUXEO_DATA:=/var/lib/nuxeo/data}
-    mkdir -p ${NUXEO_LOG:=/var/log/nuxeo}
+    mkdir -p ${NUXEO_DATA:=/home/nuxeo/var/lib/nuxeo/data}
+    mkdir -p ${NUXEO_LOG:=/home/nuxeo/var/log/nuxeo}
     mkdir -p /var/run/nuxeo
 
     # The binary store environment variable is defined : 1/ creates the folder with proper rights; 2/ fills in the corresponding property within nuxeo.conf
@@ -84,11 +84,11 @@ if [ "$1" = 'nuxeoctl' ]; then
     chown -R $NUXEO_USER:$NUXEO_USER $NUXEO_HOME
     chown -R $NUXEO_USER:$NUXEO_USER $NUXEO_DATA
     chown -R $NUXEO_USER:$NUXEO_USER $NUXEO_LOG
-    chown -R $NUXEO_USER:$NUXEO_USER /var/run/nuxeo
+    chown -R $NUXEO_USER:$NUXEO_USER /home/nuxeo/var/run/nuxeo
 
     cat << EOF >> $NUXEO_CONF
 nuxeo.log.dir=$NUXEO_LOG
-nuxeo.pid.dir=/var/run/nuxeo
+nuxeo.pid.dir=/home/nuxeo/var/run/nuxeo
 nuxeo.data.dir=$NUXEO_DATA
 nuxeo.wizard.done=true
 EOF
